@@ -4,8 +4,11 @@ version = "1.0.0"
 description = "Cyber Risk Intelligence Dashboard"
 
 [tool.vercel]
-framework = "fastapi"
+builder = "python"
 
 [build-system]
 requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project.scripts]
+app = "app:app"

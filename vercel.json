@@ -1,6 +1,3 @@
 {
-  "buildCommand": "pip install --break-system-packages -r requirements.txt && echo 'Build complete'",
-  "devCommand": "uvicorn app:app --reload --host 0.0.0.0",
-  "framework": "python",
-  "installCommand": "pip install --break-system-packages -r requirements.txt"
+  "framework": "python"
 }
