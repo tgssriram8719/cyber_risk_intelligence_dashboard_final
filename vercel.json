@@ -1,5 +1,3 @@
 {
-  "buildCommand": "pip install -r requirements.txt",
-  "devCommand": "uvicorn app:app --reload",
   "framework": "python"
 }

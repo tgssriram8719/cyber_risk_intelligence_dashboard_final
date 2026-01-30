@@ -1,0 +1,20 @@
+[project]
+name = "cyber-risk-dashboard"
+version = "1.0.0"
+description = "Cyber Risk Intelligence Dashboard"
+dependencies = [
+    "fastapi>=0.128.0",
+    "uvicorn>=0.24",
+    "pydantic>=2.0",
+    "requests>=2.31",
+    "python-dotenv>=1.0",
+    "pandas>=2.0",
+    "streamlit>=1.28",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = []
