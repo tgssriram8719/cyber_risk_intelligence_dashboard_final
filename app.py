@@ -4,25 +4,32 @@ import os
 # Add current directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# Import app with error handling
+# Create a minimal app first
+from fastapi import FastAPI
+
+app = FastAPI(
+    title="Cyber Risk Assessment Backend",
+    version="1.0.0",
+)
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+@app.get("/")
+def root():
+    return {"message": "Cyber Risk Intelligence Dashboard API"}
+
+# Try to import and use the full app if available
 try:
-    from backend.main import app
+    from backend.main import app as backend_app
+    # Replace the minimal app with the full one
+    app = backend_app
 except Exception as e:
-    print(f"Error importing FastAPI app: {e}")
+    print(f"⚠️ Could not import backend app: {e}")
     import traceback
     traceback.print_exc()
-    
-    # Create a minimal fallback app if import fails
-    from fastapi import FastAPI
-    app = FastAPI()
-    
-    @app.get("/health")
-    def health():
-        return {"status": "error", "message": str(e)}
-    
-    @app.get("/")
-    def root():
-        return {"error": str(e)}
+    # Keep using the minimal app defined above
 
 if __name__ == "__main__":
     import uvicorn

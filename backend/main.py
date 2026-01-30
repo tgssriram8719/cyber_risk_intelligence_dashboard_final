@@ -53,24 +53,37 @@ class ScanRequest(BaseModel):
 # STARTUP
 # =================================================
 
+# =================================================
+# STARTUP (Disabled for Vercel - runs on-demand instead)
+# =================================================
+
+# Initialize DB on first request instead of startup
+_db_initialized = False
+
+def ensure_db_initialized():
+    global _db_initialized
+    if not _db_initialized:
+        try:
+            init_db()
+            warnings = validate_config()
+            if warnings:
+                print("⚠️ Config warnings:")
+                for w in warnings:
+                    print(" -", w)
+            else:
+                print("✅ Configuration OK")
+            set_scan_status("idle")
+            _db_initialized = True
+        except Exception as e:
+            print(f"⚠️ DB initialization error (will retry): {e}")
+
 @app.on_event("startup")
 def startup():
+    """Startup event - try to initialize DB but don't fail if it doesn't work"""
     try:
-        init_db()
-
-        warnings = validate_config()
-        if warnings:
-            print("⚠️ Config warnings:")
-            for w in warnings:
-                print(" -", w)
-        else:
-            print("✅ Configuration OK")
-
-        set_scan_status("idle")
+        ensure_db_initialized()
     except Exception as e:
         print(f"⚠️ Startup error (non-critical): {e}")
-        import traceback
-        traceback.print_exc()
         # Don't fail startup - allow app to run even if DB init fails
 
 
