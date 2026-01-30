@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pip install --break-system-packages -r requirements.txt",
+  "buildCommand": "bash build.sh",
   "devCommand": "uvicorn app:app --reload --host 0.0.0.0",
   "framework": "python"
 }
