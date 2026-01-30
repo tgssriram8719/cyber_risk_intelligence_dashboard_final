@@ -1,6 +1,7 @@
 {
-  "installCommand": "pip install -r requirements.txt",
-  "buildCommand": "true",
-  "devCommand": "uvicorn app:app --reload",
-  "framework": "python"
+  "installCommand": "pip install --upgrade pip && pip install -r requirements.txt",
+  "buildCommand": "echo 'Build complete'",
+  "devCommand": "uvicorn app:app --reload --port 3000",
+  "framework": "python",
+  "regions": ["iad1"]
 }
