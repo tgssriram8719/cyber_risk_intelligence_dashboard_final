@@ -1,0 +1,12 @@
+{
+  "buildCommand": "pip install -r requirements.txt",
+  "devCommand": "uvicorn api.index:app --reload",
+  "framework": "fastapi",
+  "env": [
+    "VULNERS_API_KEY",
+    "VIRUSTOTAL_API_KEY",
+    "SHODAN_API_KEY",
+    "NVD_API_KEY",
+    "OPENROUTER_API_KEY"
+  ]
+}
